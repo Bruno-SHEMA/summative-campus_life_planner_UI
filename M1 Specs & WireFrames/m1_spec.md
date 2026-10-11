@@ -8,3 +8,14 @@ This platform’s main focus areas are:
  - Their durations/deadlines
  - Tags/ category
  - Search through the tasks
+
+2. Data-storage structure/ Data model: 
+
+ - Id: each record’s unique identifier
+ - Title: name of the activity
+ - dueDate:  timestamp
+ - Duration: timeStamp
+ - Tag: tag description.
+ - createdAt
+ - updatedAt
+ - Status: between: done/pending/canceled/re-scheduled
