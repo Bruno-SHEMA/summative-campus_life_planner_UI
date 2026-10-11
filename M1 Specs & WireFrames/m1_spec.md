@@ -12,10 +12,10 @@ This platform’s main focus areas are:
 2. Data-storage structure/ Data model: 
 
  - Id: each record’s unique identifier
- - Title: name of the activity
+ - Title: type: string, name of the activity
  - dueDate:  timestamp
  - Duration: timeStamp
- - Tag: tag description.
- - createdAt
- - updatedAt
- - Status: between: done/pending/canceled/re-scheduled
+ - Tag: tag description, type: string
+ - createdAt: type: timeStampt
+ - updatedAt: type: timestamp
+ - completed: datatype: boolean, False by default
