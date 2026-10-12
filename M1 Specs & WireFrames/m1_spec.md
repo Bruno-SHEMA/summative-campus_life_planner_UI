@@ -24,4 +24,3 @@ This platform’s main focus areas are:
  - Allow Keyboard navigation 
  - Ensure visual clarity, even under high-contrast resolutions
  - Responsive across all devices
-
