@@ -263,10 +263,53 @@ select {
   flex-wrap: wrap;
   gap: 10rem;
 }
-.contacts p{
-    font-weight: 600;
-    color: #047b75;
+.contacts p {
+  font-weight: 600;
+  color: #047b75;
 }
-.contacts p a{
-    color: #5267d9;
+.contacts p a {
+  color: #5267d9;
+}
+
+form input {
+  height: 1.5rem;
+}
+form span {
+  color: #7b0404;
+}
+.optional {
+  color: #707070;
+}
+.duration {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+:focus-visible {
+  outline: 2px solid #01302d;
+}
+
+.duration input {
+  height: 2.5rem;
+  border-radius: 10px;
+  border: 1px solid;
+  padding-left: 1rem;
+}
+.duration select {
+  border: 1px solid #c0c0c0;
+  border-radius: 10px;
+}
+.buttons button {
+  gap: 5rem;
+  border: 1px solid #c0c0c0;
+  padding: 1rem;
+  width: 40%;
+}
+.cancel {
+  color: #ffffff;
+  background-color: #7b0404;
+}
+.save {
+  color: #fff;
+  background-color: #047b75;
 }
