@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/styles.css" />
+  </head>
+  <body>
+    <header class="sidebar">
+      <nav class="navbar">
+        <p class="logo">
+          CampusPlanner
+          <button class="menu-button">Menu</button>
+        </p>
+        <ul class="menu">
+          <li><a href="../index.html" class="nav-link">Dashboard</a></li>
+          <li>
+            <a href="myPlanner.html" class="active nav-link">MyPlanner</a>
+          </li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="settings.html" class="nav-link">Settings</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="hero">
+        <div class="welcome">
+          <h2>Add a schedule.</h2>
+        </div>
+      </div>
+      <div class="schedules">
+        <form action="">
+          <label for="" class="input">
+            <p>Title <span>*</span></p>
+            <input
+              type="text"
+              class="search"
+              placeholder="e.g: Study Front-end Web development"
+          /></label>
+          <label for="" class="input"
+            ><p>Due Date</p>
+            <input type="date" class="search"
+          /></label>
+          <label class="input">
+            <p>Duration <span>*</span></p>
+            <div class="duration">
+              <input type="text" class="" placeholder="e.g: 2" />
+              <select name="" id="">
+                <option value="">hour</option>
+                <option value="">Minutes</option>
+              </select>
+            </div>
+          </label>
+          <label for="" class="input">
+            <p>Tag <span>*</span></p>
+            <input type="text" placeholder="e.g: assignment" class="search" />
+          </label>
+          <label for="" class="input">
+            <p>description <span class="optional">(optional)</span></p>
+            <textarea name="" id="description" class="search"></textarea>
+          </label>
+          <div class="buttons">
+            <button class="cancel">Cancel</button>
+            <button class="save">Save</button>
+          </div>
+        </form>
+      </div>
+      <hr />
+      <footer>
+        <center>©2026 - SHEMA Alain Bruno</center>
+      </footer>
+    </main>
+    <script type="module" src="../scripts/main.js"></script>
+  </body>
+</html>
