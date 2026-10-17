@@ -47,3 +47,18 @@ export function updatePlan(id, updates) {
   records = updateRecords;
 }
 
+export function importPlans(incomingPlans){
+  const existingIds = new Set(records.map((record)=> record.id));
+  const newPlans = incomingPlans.filter((plan)=> !existingIds.has(plan.id),);
+  const skipped = incomingPlans.length - newPlans.length;
+  const mergedRecords = [
+    ...records.map((record) => ({...record})),
+    ...newPlans.map((record)=>({...record})),
+  ];
+  saveData(mergedRecords);
+  records = mergedRecords;
+  return {
+    added: newPlans.length,
+    skipped,
+  };
+}
