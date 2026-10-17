@@ -1,4 +1,6 @@
+import { validateDatas } from "./validators.js";
 const STORAGE_KEY = "bruno.storage.key";
+
 export function getData() {
   let recordData;
   try {
@@ -15,21 +17,26 @@ export function getData() {
   }
   let records;
   try {
-    records = JSON.parse(storedValue);
+    records = JSON.parse(recordData);
   } catch (error) {
     throw new error("Oooops", console.error(Error));
   }
+  const errors = validateDatas(records);
+  if (errors.length > 0) {
+    throw new Error(`saved data failed validation: ${errors}`);
+  }
   return records;
 }
-
 export function saveData(records) {
-  let data;
-  if (!Array.isArray(records)) {
-    throw new error("Data must be an array");
+  const errors = validateDatas(records);
+  if (errors.length > 0) {
+    throw new Error(
+      `Ooops, Could not save invalid data: \n${errors.join("\n")}`,
+    );
   }
-   
+
   try {
-    data = JSON.stringify(records);
+    const data = JSON.stringify(records);
     localStorage.setItem(STORAGE_KEY, data);
   } catch (error) {
     throw new error(console.error(error));
