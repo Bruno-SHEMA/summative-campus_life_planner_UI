@@ -43,3 +43,49 @@ function exportSchedules(){
         showStatus("Export Failed, try again", true);
     }
 }
+async function importSchedules(){
+    const file = fileInput.files?.[0];
+    if (!file){
+        showStatus("Please choose a JSON file first!", true);
+        return;
+    }
+    if(!file.name.toLowerCase().endsWith(".json")){
+        showStatus("Yo, Select a file with a .json extension", true);
+        return;
+    }
+    importButton.disabled = true;
+    exportButton.disabled = true;
+    showStatus("Validating file .....");
+    try{
+        const fileText = await file.text();
+        console.log("Selected File", file.name);
+        console.log("File content", fileText);
+        console.log("File content Type: ", typeof fileText);
+        const importedPlans = JSON.parse(fileText);
+        const errors = validateDatas(importedPlans);
+        if (errors.length > 0){
+            const preview = errors.slice(0, 5).join(" ");
+            const remaining = errors.length -5;
+            showStatus(`import Rejected, Try again ${preview}${remaining > 0 ?`And ${remaining} more error(s).` : ""}`, true,);
+            return;
+        }
+        const result = importPlans(importedPlans);
+        showStatus(
+            `import complete!`
+        );
+        fileInput.value = "";
+    } catch(error){
+        console.error("import Faileddddddd", error);
+        showStatus(
+            error instanceof SyntaxError ? "import rejected, invalid shii" : "Thingy failed",
+            true,
+        );
+    } finally {
+        importButton.disabled = false;
+        exportButton.disabled = false;
+    }
+}
+if(initializeSettings()){
+    exportButton.addEventListener("click", exportSchedules);
+    importButton.addEventListener("click", importSchedules);
+}
