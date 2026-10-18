@@ -24,6 +24,6 @@ function menu(){
   menuButton.addEventListener("click",()=>{
     sidebar.classList.toggle("dnone");
   })
-  sidebar.classList.remove("dnone");
+  sidebar.classList.add("dnone");
 }
 menu()
