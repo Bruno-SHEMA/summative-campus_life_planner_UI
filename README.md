@@ -1,7 +1,7 @@
 # summative-campus_life_planner_UI
 
- # demo video: https://youtu.be/B2UNcPTT2MQ
- # github pages link: https://bruno-shema.github.io/summative-campus_life_planner_UI/
+ * demo video: https://youtu.be/B2UNcPTT2MQ
+ * github pages link: https://bruno-shema.github.io/summative-campus_life_planner_UI/
  CampusPlanner is a responsive web application CampusPlanner is a platform that will help students organize their academic activities and tasks, track deadlines, and plan their time effectively . It provides a simple dashboard for managing campus activites, and keep track of either completed or pending tasks on a single platform.
  To develop it I used HTML for semantic page structure, CSS for styling, responsive layouts, flexbox, media queries, animations, and transactions, Javascript for application logic, DOM manipulation, event handling, filtering, sorting, data management, and for REGEX validations, I also used localStorage and JSON for persistent data storage, data import and export.
 
@@ -26,7 +26,8 @@ campusPlanner also includes features like, input validation for validating user 
 
  3. REGEX catalog:
 
-     const title_pattern = /^(?!.* {2,})\S(?:.*\S)?$/;
+    /^(?!.* {2,})\S(?:.*\S)?$/;
+   
  Purpose: First advenced regex pattern to help validate title elements when a user is adding a new record. This REGEX doesn't allow user to add any records that have recurring or trailing spaces, e.tc
 
     /^[1-9]\d*$/;
