@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusFlow - Data Tests</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.6;
+    }
+
+    h1, h2 {
+      color: #243b64;
+    }
+
+    .pass {
+      color: #16803c;
+    }
+
+    .fail {
+      color: #c62828;
+    }
+
+    .test {
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #f2f4f8;
+    }
+
+    button {
+      padding: 10px 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main">Skip to main content</a>
+
+  <main id="main">
+    <h1>CampusFlow Data Tests</h1>
+    <p>Testing seed.json loading and basic data integrity.</p>
+
+    <button id="run-tests" type="button">Run Tests Again</button>
+
+    <h2>Test Results</h2>
+    <div id="test-results" aria-live="polite">
+      Tests have not run yet.
+    </div>
+
+    <h2>Loaded Records</h2>
+    <p id="record-count">No records loaded yet.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Type</th>
+          <th scope="col">Title</th>
+          <th scope="col">Duration (minutes)</th>
+        </tr>
+      </thead>
+      <tbody id="records"></tbody>
+    </table>
+  </main>
+
+  <script type="module">
+    const results = document.querySelector("#test-results");
+    const recordCount = document.querySelector("#record-count");
+    const recordsTable = document.querySelector("#records");
+    const runButton = document.querySelector("#run-tests");
+
+    function reportTest(name, passed, details = "") {
+      const item = document.createElement("div");
+      item.className = `test ${passed ? "pass" : "fail"}`;
+
+      item.textContent =
+        `${passed ? "PASS" : "FAIL"}: ${name}` +
+        (details ? ` — ${details}` : "");
+
+      results.append(item);
+    }
+
+    async function runTests() {
+      results.replaceChildren();
+      recordsTable.replaceChildren();
+      recordCount.textContent = "Loading...";
+
+      try {
+        const response = await fetch("./seed.json");
+
+        reportTest(
+          "Seed file request",
+          response.ok,
+          response.ok
+            ? "seed.json was fetched successfully."
+            : `HTTP status ${response.status}`
+        );
+
+        if (!response.ok) {
+          throw new Error(`Could not load seed.json: HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        reportTest(
+          "Valid JSON",
+          Array.isArray(data),
+          "The file must contain an array of records."
+        );
+
+        if (!Array.isArray(data)) {
+          throw new Error("Seed data must be a JSON array.");
+        }
+
+        reportTest(
+          "Seed contains records",
+          data.length > 0,
+          `${data.length} records found.`
+        );
+
+        const ids = data.map((record) => record.id);
+
+        reportTest(
+          "All IDs exist",
+          data.every(
+            (record) =>
+              typeof record.id === "string" &&
+              record.id.trim().length > 0
+          )
+        );
+
+        reportTest(
+          "IDs are unique",
+          new Set(ids).size === ids.length
+        );
+
+        reportTest(
+          "Record types are valid",
+          data.every(
+            (record) =>
+              record.type === "task" || record.type === "event"
+          )
+        );
+
+        reportTest(
+          "Durations are positive whole numbers",
+          data.every(
+            (record) =>
+              Number.isInteger(record.duration) &&
+              record.duration > 0
+          )
+        );
+
+        reportTest(
+          "Titles are not empty",
+          data.every(
+            (record) =>
+              typeof record.title === "string" &&
+              record.title.trim().length > 0
+          )
+        );
+
+        for (const record of data) {
+          const row = document.createElement("tr");
+
+          for (const value of [
+            record.id,
+            record.type,
+            record.title,
+            record.duration
+          ]) {
+            const cell = document.createElement("td");
+            cell.textContent = String(value);
+            row.append(cell);
+          }
+
+          recordsTable.append(row);
+        }
+
+        recordCount.textContent =
+          `${data.length} records loaded successfully.`;
+      } catch (error) {
+        recordCount.textContent = "Failed to load records.";
+
+        reportTest(
+          "Data loading",
+          false,
+          error.message
+        );
+
+        console.error("CampusFlow tests failed:", error);
+      }
+    }
+
+    runButton.addEventListener("click", runTests);
+
+    runTests();
+  </script>
+</body>
+</html>
