@@ -1,0 +1,46 @@
+[
+  {
+    "id": "task_seed_001",
+    "title": "Complete JavaScript Assignment",
+    "description": "",
+    "tag": "Study",
+    "dueDate": "2026-10-22",
+    "duration": 120,
+    "completed": false
+  },
+  {
+    "id": "task_seed_002",
+    "title": "Review canvas resourcess",
+    "description": "Revise the notes from this week's lectures.",
+    "tag": "Study",
+    "dueDate": "2026-10-24",
+    "duration": 90,
+    "completed": false
+  },
+  {
+    "id": "task_seed_003",
+    "title": "Work on intranet activits",
+    "description": "Intranet activitiess",
+    "tag": "Project",
+    "dueDate": "",
+    "duration": 180,
+    "completed": false
+  },
+  {
+    "id": "event_seed_001",
+    "title": "Study Group Meeting",
+    "tag": "Campus",
+    "dueDate": "2026-10-23",
+    "duration": 60,
+    "completed": false
+  },
+  {
+    "id": "event_seed_002",
+    "title": "PD Session",
+    "description": "Review personal goals and plan the coming week.",
+    "tag": "Personal",
+    "dueDate": "2026-10-25",
+    "duration": 45,
+    "completed": false
+  }
+]
